@@ -1,0 +1,43 @@
+{
+  "name": "aahp-cron",
+  "version": "0.1.0",
+  "description": "Pipeline orchestrator for AAHP v3 - schedules and runs aahp-runner across all projects",
+  "license": "MIT",
+  "author": "homeofe",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/homeofe/aahp-cron.git"
+  },
+  "keywords": [
+    "aahp",
+    "cron",
+    "pipeline",
+    "orchestrator",
+    "agent",
+    "autonomous",
+    "claude",
+    "scheduler"
+  ],
+  "type": "module",
+  "bin": {
+    "aahp-cron": "./dist/cli.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p ./",
+    "dev": "node --loader ts-node/esm src/cli.ts",
+    "start": "node dist/cli.js",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^12.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.0"
+  }
+}

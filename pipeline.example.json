@@ -1,0 +1,26 @@
+{
+  "rootDir": "E:\\_nextcloud.weloveselfmade.com\\_Data\\_Development",
+  "schedule": "02:00",
+  "defaults": {
+    "backend": "auto",
+    "limit": 5,
+    "timeoutMinutes": 10,
+    "pauseBetweenProjects": 0
+  },
+  "projects": [
+    {
+      "name": "openclaw-memory-core",
+      "priority": 1,
+      "backend": "claude",
+      "limit": 3
+    },
+    {
+      "name": "openclaw-memory-brain",
+      "priority": 2
+    },
+    {
+      "name": "AEGIS",
+      "enabled": false
+    }
+  ]
+}

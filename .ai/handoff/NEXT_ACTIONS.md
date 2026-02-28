@@ -6,97 +6,43 @@
 
 ---
 
-## T-001: Install dependencies and verify build
+## Status Summary
 
-**Goal:** Run `npm install` and `npm run build` in aahp-cron, confirm TypeScript compiles without errors.
+| Status | Count |
+|--------|-------|
+| Done   | 3     |
+| Ready  | 0     |
+| Blocked| 0     |
 
-**Context:**
-- All source files are written in `src/` but `node_modules/` and `dist/` do not exist yet
-- Project uses TypeScript ESNext modules (`"module": "ESNext"`, `"moduleResolution": "bundler"`)
-- Dependencies: `chalk`, `commander` (runtime); `typescript`, `ts-node`, `@types/node` (dev)
-
-**What to do:**
-1. `cd E:\_nextcloud.weloveselfmade.com\_Data\_Development\aahp-cron`
-2. `npm install`
-3. `npm run build`
-4. Verify `dist/cli.js` exists and has the shebang line
-5. Fix any TypeScript errors (likely none, but check)
-6. Update STATUS.md build health table
-7. Update MANIFEST.json + this file
-
-**Files:**
-- `package.json`: dependencies and build scripts
-- `tsconfig.json`: TypeScript config (ESNext, bundler resolution)
-- `src/*.ts`: all source modules
-
-**Definition of done:**
-- [ ] `npm install` succeeds
-- [ ] `npm run build` exits 0, no errors
-- [ ] `dist/cli.js` exists
-- [ ] STATUS.md build row updated to green
+All scaffolding tasks are complete. The project is built, pushed to GitHub, and has CI enabled.
 
 ---
 
-## T-002: Initialize git repo and push to GitHub
+## Ready - Work These Next
 
-**Goal:** Create a git repo, make the initial commit, create `github.com/homeofe/aahp-cron`, and push.
+No tasks are currently ready. All backlog items have been completed.
 
-**Context:**
-- No `.git` directory exists yet
-- `pipeline.json` is in `.gitignore` (user config, never committed)
-- Depends on T-001 (build must work first)
-
-**What to do:**
-1. `cd E:\_nextcloud.weloveselfmade.com\_Data\_Development\aahp-cron`
-2. `git init`
-3. `git add -A`
-4. `git commit -m "feat: initial aahp-cron pipeline orchestrator
-
-TypeScript/Node.js pipeline orchestrator for AAHP v3.
-Discovers projects, runs aahp-runner per project, reports results.
-Includes schedule management (Windows Task Scheduler + cron).
-
-Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"`
-5. `gh repo create homeofe/aahp-cron --public --description "Pipeline orchestrator for AAHP v3 - schedules and runs aahp-runner across all projects"`
-6. `git remote add origin https://github.com/homeofe/aahp-cron.git`
-7. `git push -u origin main`
-8. Update MANIFEST.json with the commit hash
-
-**Files:**
-- `.gitignore`: excludes `pipeline.json`, `dist/`, `node_modules/`
-
-**Definition of done:**
-- [ ] Repo exists at github.com/homeofe/aahp-cron
-- [ ] Initial commit pushed
-- [ ] MANIFEST.json updated with commit hash
+Suggested next tasks to add:
+- Add ESLint configuration and lint step to CI
+- Add unit tests with a test framework (vitest or node:test)
+- Add test step to CI workflow once tests exist
+- Implement end-to-end smoke test (dry-run mode)
 
 ---
 
-## T-003: Add GitHub Actions CI workflow
+## Blocked
 
-**Goal:** Add `.github/workflows/ci.yml` that runs `npm install && npm run build` on push/PR.
-
-**Context:**
-- Depends on T-002 (repo must exist first)
-- No tests yet, so CI only validates the build
-
-**What to do:**
-1. Create `.github/workflows/ci.yml` with Node 20, install, build steps
-2. Commit and push
-3. Verify the action runs green
-
-**Definition of done:**
-- [ ] CI workflow file committed
-- [ ] GitHub Actions shows green on first run
+No blocked tasks.
 
 ---
 
 ## Recently Completed
 
-| Item | Resolution |
-|------|-----------|
-| Scaffold project | All source files written: cli.ts, pipeline.ts, config.ts, discovery.ts, runner.ts, reporter.ts, scheduler.ts, types.ts |
-| AAHP protocol setup | .ai/handoff/ structure created with all v3 files |
+| Task | Title | Completed |
+|------|-------|-----------|
+| T-003 | Add GitHub Actions CI workflow | 2026-02-28 |
+| T-002 | Initialize git repo and push to github.com/homeofe/aahp-cron | 2026-02-28 |
+| T-001 | Install dependencies and verify build | 2026-02-28 |
 
 ---
 
@@ -113,4 +59,5 @@ Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"`
 | Scheduler | `src/scheduler.ts` |
 | Types | `src/types.ts` |
 | Example config | `pipeline.example.json` |
+| CI workflow | `.github/workflows/ci.yml` |
 | aahp-runner | `../aahp-runner/dist/cli.js` |

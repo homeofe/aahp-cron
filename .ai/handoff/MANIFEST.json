@@ -5,7 +5,7 @@
     "agent": "github-copilot-cli/claude-sonnet-4.6",
     "session_id": "init-scaffold-2026-02-28",
     "timestamp": "2026-02-28T19:43:00Z",
-    "commit": "(not yet committed)",
+    "commit": "77c556802b582e0c71e2b934fd20d4a355608f8a",
     "phase": "scaffolding",
     "duration_minutes": 15
   },
@@ -71,17 +71,17 @@
     },
     "T-002": {
       "title": "Initialize git repo and push to github.com/homeofe/aahp-cron",
-      "status": "ready",
+      "status": "done",
       "priority": "high",
       "depends_on": [],
-      "created": "2026-02-28T19:43:00Z"
+      "created": "2026-02-28T19:43:00Z",
+      "completed": "2026-02-28T19:55:00Z"
     },
     "T-003": {
       "title": "Add GitHub Actions CI workflow",
-      "status": "blocked",
+      "status": "ready",
       "priority": "medium",
       "depends_on": ["T-002"],
-      "blocked_by": "Repo must exist before CI can be configured",
       "created": "2026-02-28T19:43:00Z"
     }
   }

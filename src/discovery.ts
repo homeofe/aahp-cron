@@ -38,7 +38,7 @@ export function discoverProjects(config: PipelineConfig): DiscoveredProject[] {
   const projects: DiscoveredProject[] = []
 
   for (const entry of entries) {
-    if (!entry.isDirectory()) continue
+    if (!entry.isDirectory() && !entry.isSymbolicLink()) continue
     const repoPath = path.join(config.rootDir, entry.name)
     const manifestPath = path.join(repoPath, MANIFEST_REL)
     if (!fs.existsSync(manifestPath)) continue

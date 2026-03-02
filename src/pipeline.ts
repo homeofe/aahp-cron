@@ -32,8 +32,10 @@ export async function runPipeline(config: PipelineConfig, opts: RunOptions = {})
   const baseArgs = isJsFile ? [runnerPath] : []
 
   // Normalise project list: undefined → [], 'a,b' → ['a','b'], ['a','b'] → ['a','b']
+  // Also splits on spaces: PowerShell converts bare commas (ai-red,ai-blue) into
+  // space-joined strings ("ai-red ai-blue") when passing to external commands.
   const projectList: string[] = opts.project
-    ? (Array.isArray(opts.project) ? opts.project : opts.project.split(',').map(s => s.trim()).filter(Boolean))
+    ? (Array.isArray(opts.project) ? opts.project : opts.project.split(/[,\s]+/).map(s => s.trim()).filter(Boolean))
     : []
 
   if (opts.dryRun) {

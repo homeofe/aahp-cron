@@ -25,9 +25,9 @@ function requireConfig(explicitPath?: string) {
 
 program
   .command('run')
-  .description('Run the full pipeline (or a single project)')
+  .description('Run the full pipeline (or one/more specific projects)')
   .option('-c, --config <path>', 'Path to pipeline.json')
-  .option('-p, --project <name>', 'Run only this project')
+  .option('-p, --project <names>', 'Run only these projects (comma-separated for multiple, e.g. ai-red-team,ai-blue-team)')
   .option('--dry-run', 'Show what would run without spawning agents')
   .action(async (opts: { config?: string; project?: string; dryRun?: boolean }) => {
     const config = requireConfig(opts.config)

@@ -3,3 +3,4 @@ dist/
 *.log
 pipeline.json
 *.local.json
+.ai/logs/

@@ -59,7 +59,7 @@
     "manifest_plus_core": 400,
     "full_read": 2200
   },
-  "next_task_id": 4,
+  "next_task_id": 9,
   "tasks": {
     "T-001": {
       "title": "Install dependencies and verify build",
@@ -86,6 +86,51 @@
       ],
       "created": "2026-02-28T19:43:00Z",
       "completed": "2026-02-28T20:09:23.713Z"
+    },
+    "T-004": {
+      "title": "Add vitest and unit tests for core modules [high]",
+      "status": "ready",
+      "priority": "medium",
+      "depends_on": [],
+      "created": "2026-03-02T03:26:54.406Z",
+      "github_issue": 1,
+      "github_repo": "homeofe/aahp-cron"
+    },
+    "T-005": {
+      "title": "Add ESLint with TypeScript support [medium]",
+      "status": "ready",
+      "priority": "medium",
+      "depends_on": [],
+      "created": "2026-03-02T03:26:54.406Z",
+      "github_issue": 2,
+      "github_repo": "homeofe/aahp-cron"
+    },
+    "T-006": {
+      "title": "Update CI workflow to run tests and lint [medium]",
+      "status": "ready",
+      "priority": "medium",
+      "depends_on": [],
+      "created": "2026-03-02T03:26:54.406Z",
+      "github_issue": 3,
+      "github_repo": "homeofe/aahp-cron"
+    },
+    "T-007": {
+      "title": "Add runtime validation for pipeline.json [medium]",
+      "status": "ready",
+      "priority": "medium",
+      "depends_on": [],
+      "created": "2026-03-02T03:26:54.406Z",
+      "github_issue": 4,
+      "github_repo": "homeofe/aahp-cron"
+    },
+    "T-008": {
+      "title": "Add integration smoke test with dry-run [low]",
+      "status": "ready",
+      "priority": "medium",
+      "depends_on": [],
+      "created": "2026-03-02T03:26:54.406Z",
+      "github_issue": 5,
+      "github_repo": "homeofe/aahp-cron"
     }
   }
 }

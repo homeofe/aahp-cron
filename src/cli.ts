@@ -7,7 +7,6 @@ import { loadConfig, saveConfig, buildInitialConfig, resolveRunnerPath } from '.
 import { discoverProjects } from './discovery.js'
 import { runPipeline } from './pipeline.js'
 import { registerScheduler, unregisterScheduler } from './scheduler.js'
-import { loadLastRun } from './reporter.js'
 
 const DEFAULT_CONFIG_LOCATIONS = ['pipeline.json', '~/.aahp-cron.json']
 
@@ -67,27 +66,16 @@ program
 
 program
   .command('status')
-  .description('Show the last pipeline run result')
-  .action(() => {
-    const run = loadLastRun()
-    if (!run) {
-      console.log(chalk.gray('No run history found. Run: aahp-cron run'))
-      return
-    }
-    console.log(chalk.bold('\nLast pipeline run'))
-    console.log(`  Started : ${run.startedAt}`)
-    console.log(`  Finished: ${run.finishedAt}`)
-    console.log(`  Projects: ${run.totalProjects} total | Ran: ${run.ran} | Skipped: ${run.skipped}`)
-    console.log(`  Results : ${chalk.green(run.succeeded + ' succeeded')}  ${chalk.red(run.failed + ' failed')}`)
-    if (run.results.length > 0) {
-      console.log()
-      for (const r of run.results) {
-        const icon = r.success ? chalk.green('✅') : chalk.red('❌')
-        const dur = `${(r.durationMs / 1000).toFixed(1)}s`
-        console.log(`  ${icon} ${r.projectName.padEnd(32)} ${dur.padStart(7)}${r.error ? chalk.red('  ' + r.error) : ''}`)
-      }
-    }
-    console.log()
+  .description('Show all projects and their current task status (delegates to aahp list)')
+  .option('-c, --config <path>', 'Path to pipeline.json')
+  .action((opts: { config?: string }) => {
+    const config = requireConfig(opts.config)
+    const { spawnSync } = require('child_process')
+    const runnerPath = resolveRunnerPath(config)
+    const isJs = runnerPath.endsWith('.js')
+    const cmd = isJs ? process.execPath : runnerPath
+    const args = [...(isJs ? [runnerPath] : []), 'list', '--all', '--root', config.rootDir]
+    spawnSync(cmd, args, { stdio: 'inherit', env: { ...process.env } })
   })
 
 // ── config ────────────────────────────────────────────────────────────────────

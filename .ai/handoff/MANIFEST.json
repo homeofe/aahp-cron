@@ -90,7 +90,7 @@
     "T-004": {
       "title": "Add vitest and unit tests for core modules [high]",
       "status": "ready",
-      "priority": "medium",
+      "priority": "high",
       "depends_on": [],
       "created": "2026-03-02T03:26:54.406Z",
       "github_issue": 1,
@@ -126,7 +126,7 @@
     "T-008": {
       "title": "Add integration smoke test with dry-run [low]",
       "status": "ready",
-      "priority": "medium",
+      "priority": "low",
       "depends_on": [],
       "created": "2026-03-02T03:26:54.406Z",
       "github_issue": 5,

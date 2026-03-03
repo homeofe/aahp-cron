@@ -3,6 +3,7 @@ import { program } from 'commander'
 import chalk from 'chalk'
 import * as path from 'path'
 import * as fs from 'fs'
+import { spawnSync } from 'node:child_process'
 import { loadConfig, saveConfig, buildInitialConfig, resolveRunnerPath } from './config.js'
 import { discoverProjects } from './discovery.js'
 import { runPipeline } from './pipeline.js'
@@ -70,7 +71,6 @@ program
   .option('-c, --config <path>', 'Path to pipeline.json')
   .action((opts: { config?: string }) => {
     const config = requireConfig(opts.config)
-    const { spawnSync } = require('child_process')
     const runnerPath = resolveRunnerPath(config)
     const isJs = runnerPath.endsWith('.js')
     const cmd = isJs ? process.execPath : runnerPath

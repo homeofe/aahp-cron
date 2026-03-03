@@ -9,18 +9,19 @@ interface ManifestSnippet {
   tasks?: Record<string, { status: string }>
 }
 
-function countTasks(repoPath: string): { ready: number; active: number; blocked: number } {
+function countTasks(repoPath: string): { ready: number; active: number; blocked: number; done: number } {
   try {
     const raw = fs.readFileSync(path.join(repoPath, MANIFEST_REL), 'utf8')
     const m = JSON.parse(raw) as ManifestSnippet
     const tasks = Object.values(m.tasks ?? {})
     return {
-      ready: tasks.filter(t => t.status === 'ready').length,
-      active: tasks.filter(t => t.status === 'in_progress').length,
+      ready:   tasks.filter(t => t.status === 'ready').length,
+      active:  tasks.filter(t => t.status === 'in_progress').length,
       blocked: tasks.filter(t => t.status === 'blocked').length,
+      done:    tasks.filter(t => t.status === 'done' || t.status === 'completed').length,
     }
   } catch {
-    return { ready: 0, active: 0, blocked: 0 }
+    return { ready: 0, active: 0, blocked: 0, done: 0 }
   }
 }
 
@@ -45,7 +46,7 @@ export function discoverProjects(config: PipelineConfig): DiscoveredProject[] {
     if (!fs.existsSync(manifestPath)) continue
 
     const projConfig = resolveProjectConfig(entry.name, config, defaults)
-    const { ready, active, blocked } = countTasks(repoPath)
+    const { ready, active, blocked, done } = countTasks(repoPath)
 
     projects.push({
       name: entry.name,
@@ -53,6 +54,7 @@ export function discoverProjects(config: PipelineConfig): DiscoveredProject[] {
       readyTaskCount: ready,
       activeTaskCount: active,
       blockedTaskCount: blocked,
+      doneTaskCount: done,
       config: projConfig,
     })
   }
@@ -68,7 +70,7 @@ export function discoverProjects(config: PipelineConfig): DiscoveredProject[] {
     if (!fs.existsSync(manifestPath)) continue
 
     const projConfig = resolveProjectConfig(override.name, config, defaults)
-    const { ready, active, blocked } = countTasks(override.name)
+    const { ready, active, blocked, done } = countTasks(override.name)
 
     projects.push({
       name: path.basename(override.name),
@@ -76,6 +78,7 @@ export function discoverProjects(config: PipelineConfig): DiscoveredProject[] {
       readyTaskCount: ready,
       activeTaskCount: active,
       blockedTaskCount: blocked,
+      doneTaskCount: done,
       config: projConfig,
     })
   }

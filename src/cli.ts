@@ -57,7 +57,8 @@ program
     for (const p of projects) {
       const enabledStr = p.config.enabled ? '' : chalk.red(' [disabled]')
       const blockedStr = p.blockedTaskCount > 0 ? chalk.yellow(` blocked:${p.blockedTaskCount}`) : ''
-      const tasksStr = chalk.gray(`ready:${p.readyTaskCount} active:${p.activeTaskCount}`) + blockedStr
+      const doneStr   = p.doneTaskCount   > 0 ? chalk.green(` done:${p.doneTaskCount}`)         : ''
+      const tasksStr = chalk.gray(`ready:${p.readyTaskCount} active:${p.activeTaskCount}`) + blockedStr + doneStr
       const backendStr = chalk.gray(`backend=${p.config.backend} limit=${p.config.limit}`)
       console.log(`  ${chalk.cyan(p.name.padEnd(35))} ${tasksStr}  ${backendStr}${enabledStr}`)
     }

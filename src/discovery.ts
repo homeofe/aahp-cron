@@ -9,7 +9,7 @@ interface ManifestSnippet {
   tasks?: Record<string, { status: string }>
 }
 
-function countTasks(repoPath: string): { ready: number; active: number } {
+function countTasks(repoPath: string): { ready: number; active: number; blocked: number } {
   try {
     const raw = fs.readFileSync(path.join(repoPath, MANIFEST_REL), 'utf8')
     const m = JSON.parse(raw) as ManifestSnippet
@@ -17,9 +17,10 @@ function countTasks(repoPath: string): { ready: number; active: number } {
     return {
       ready: tasks.filter(t => t.status === 'ready').length,
       active: tasks.filter(t => t.status === 'in_progress').length,
+      blocked: tasks.filter(t => t.status === 'blocked').length,
     }
   } catch {
-    return { ready: 0, active: 0 }
+    return { ready: 0, active: 0, blocked: 0 }
   }
 }
 
@@ -44,13 +45,14 @@ export function discoverProjects(config: PipelineConfig): DiscoveredProject[] {
     if (!fs.existsSync(manifestPath)) continue
 
     const projConfig = resolveProjectConfig(entry.name, config, defaults)
-    const { ready, active } = countTasks(repoPath)
+    const { ready, active, blocked } = countTasks(repoPath)
 
     projects.push({
       name: entry.name,
       repoPath,
       readyTaskCount: ready,
       activeTaskCount: active,
+      blockedTaskCount: blocked,
       config: projConfig,
     })
   }
@@ -66,13 +68,14 @@ export function discoverProjects(config: PipelineConfig): DiscoveredProject[] {
     if (!fs.existsSync(manifestPath)) continue
 
     const projConfig = resolveProjectConfig(override.name, config, defaults)
-    const { ready, active } = countTasks(override.name)
+    const { ready, active, blocked } = countTasks(override.name)
 
     projects.push({
       name: path.basename(override.name),
       repoPath: override.name,
       readyTaskCount: ready,
       activeTaskCount: active,
+      blockedTaskCount: blocked,
       config: projConfig,
     })
   }

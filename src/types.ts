@@ -48,6 +48,7 @@ export interface DiscoveredProject {
   repoPath: string
   readyTaskCount: number
   activeTaskCount: number
+  blockedTaskCount: number
   /** Merged config: discovery + any override from pipeline.json */
   config: Required<Omit<ProjectOverride, 'name'>>
 }

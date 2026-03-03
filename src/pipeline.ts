@@ -48,7 +48,8 @@ export async function runPipeline(config: PipelineConfig, opts: RunOptions = {})
     console.log(chalk.gray(`  Runner : ${runnerPath}`))
     console.log(chalk.yellow(`  ${projects.length} project(s) would run:\n`))
     for (const p of projects) {
-      console.log(chalk.gray(`    ${p.name.padEnd(35)} ready:${p.readyTaskCount} active:${p.activeTaskCount}`))
+      const blockedStr = p.blockedTaskCount > 0 ? chalk.yellow(` blocked:${p.blockedTaskCount}`) : ''
+      console.log(chalk.gray(`    ${p.name.padEnd(35)} ready:${p.readyTaskCount} active:${p.activeTaskCount}`) + blockedStr)
     }
     console.log()
     return { startedAt, finishedAt: new Date().toISOString(), totalProjects: projects.length, ran: 0, succeeded: 0, failed: 0, skipped: 0, results: [] }

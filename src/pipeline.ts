@@ -61,7 +61,6 @@ export async function runPipeline(config: PipelineConfig, opts: RunOptions = {})
     ...baseArgs,
     'run',
     '--yes',
-    '--follow-up',
     '--root', config.rootDir,
     '--backend', String(defaults.backend ?? 'auto'),
     '--limit', String(defaults.limit ?? 5),

@@ -125,6 +125,9 @@ Create with `aahp-cron init --root <path>` or edit manually:
 
 ## Changelog
 
+### v0.1.2
+- **fix:** Remove `--follow-up` flag from `aahp-runner` invocation — flag does not exist, caused `error: unknown option '--follow-up'`
+
 ### v0.1.1
 - **fix:** `init` now writes to `~/.aahp-cron.json` by default — config works from any directory, not just the project folder
 - **fix:** `--root <path>` is now required with a clear error message when missing (previously silently used `cwd`)

@@ -1,6 +1,6 @@
 {
   "name": "aahp-cron",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Pipeline orchestrator for AAHP v3 - schedules and runs aahp-runner across all projects",
   "license": "MIT",
   "author": "homeofe",

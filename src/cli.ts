@@ -2,6 +2,7 @@
 import { program } from 'commander'
 import chalk from 'chalk'
 import * as path from 'path'
+import os from 'os'
 import * as fs from 'fs'
 import { spawnSync } from 'node:child_process'
 import { loadConfig, saveConfig, buildInitialConfig, resolveRunnerPath } from './config.js'
@@ -102,20 +103,38 @@ program
 
 program
   .command('init')
-  .description('Create a pipeline.json in the current directory')
-  .option('-r, --root <path>', 'Root development directory')
-  .action((opts: { root?: string }) => {
-    const dest = path.join(process.cwd(), 'pipeline.json')
+  .description('Create ~/.aahp-cron.json (global config, works from any directory)')
+  .option('-r, --root <path>', 'Workspace root directory containing your projects (required)')
+  .option('--local', 'Write pipeline.json in current directory instead of ~/.aahp-cron.json')
+  .action((opts: { root?: string; local?: boolean }) => {
+    const homeConfig = path.join(os.homedir(), '.aahp-cron.json')
+    const localConfig = path.join(process.cwd(), 'pipeline.json')
+    const dest = opts.local ? localConfig : homeConfig
+
     if (fs.existsSync(dest)) {
-      console.log(chalk.yellow('pipeline.json already exists. Edit it directly.'))
+      console.log(chalk.yellow(`Config already exists at ${dest}. Edit it directly.`))
+      console.log(chalk.gray(`  Or delete it and re-run: aahp-cron init --root <path>`))
       return
     }
-    const rootDir = opts.root ?? process.cwd()
+
+    if (!opts.root) {
+      console.error(chalk.red('Error: --root <path> is required.'))
+      console.error(chalk.gray('  Example: aahp-cron init --root ~/workspace'))
+      console.error(chalk.gray('  The root should be the directory containing all your projects.'))
+      process.exit(1)
+    }
+
+    const rootDir = path.resolve(opts.root.replace(/^~/, os.homedir()))
+    if (!fs.existsSync(rootDir)) {
+      console.error(chalk.red(`Error: root directory does not exist: ${rootDir}`))
+      process.exit(1)
+    }
+
     const config = buildInitialConfig(rootDir)
     saveConfig(config, dest)
-    console.log(chalk.green(`Created pipeline.json`))
-    console.log(chalk.gray(`  Edit ${dest} to configure your projects.`))
-    console.log(chalk.gray('  Then run: aahp-cron list'))
+    console.log(chalk.green(`Created ${dest}`))
+    console.log(chalk.gray(`  rootDir: ${rootDir}`))
+    console.log(chalk.gray('  Run: aahp-cron list'))
   })
 
 // ── schedule ──────────────────────────────────────────────────────────────────

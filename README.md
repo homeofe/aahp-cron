@@ -19,19 +19,27 @@ Pipeline orchestrator for [AAHP v3](https://github.com/homeofe/AAHP). Discovers 
 ## Setup
 
 ```bash
-cd aahp-cron
-npm install
-npm run build
+# Install globally
+npm install -g aahp-cron
+# or: clone + npm link
+git clone https://github.com/homeofe/aahp-cron && cd aahp-cron && npm install && npm run build && npm link
 
-# Create your pipeline.json (copy from example)
-cp pipeline.example.json pipeline.json
-# Edit pipeline.json to set your rootDir and project overrides
+# Create global config (recommended — works from any directory)
+aahp-cron init --root ~/workspace
+
+# Or: create a local pipeline.json in current directory
+aahp-cron init --root ~/workspace --local
 ```
+
+> **Note:** Config is saved to `~/.aahp-cron.json` by default so `aahp-cron list` works from any directory. Use `--local` if you prefer a per-directory `pipeline.json`.
 
 ## Usage
 
 ```bash
-# List all discovered projects
+# One-time setup
+aahp-cron init --root /path/to/your/projects
+
+# List all discovered projects and their task status
 aahp-cron list
 
 # Run the full pipeline once
@@ -40,8 +48,9 @@ aahp-cron run
 # Preview what would run (no agents spawned)
 aahp-cron run --dry-run
 
-# Run a single project
+# Run one or more specific projects
 aahp-cron run --project openclaw-memory-core
+aahp-cron run --project ai-red-team,ai-blue-team
 
 # Show last run results
 aahp-cron status
@@ -56,13 +65,13 @@ aahp-cron schedule set 02:00
 aahp-cron schedule remove
 ```
 
-## pipeline.json
+## Config (~/.aahp-cron.json / pipeline.json)
 
-Copy `pipeline.example.json` to `pipeline.json` (gitignored) and edit:
+Create with `aahp-cron init --root <path>` or edit manually:
 
 ```json
 {
-  "rootDir": "E:\\_Development",
+  "rootDir": "/home/user/workspace",
   "schedule": "02:00",
   "defaults": {
     "backend": "auto",
@@ -113,3 +122,16 @@ Copy `pipeline.example.json` to `pipeline.json` (gitignored) and edit:
 - `--dry-run` support
 - Windows Task Scheduler / cron integration via `aahp-cron schedule set`
 - Run history and status command
+
+## Changelog
+
+### v0.1.1
+- **fix:** `init` now writes to `~/.aahp-cron.json` by default — config works from any directory, not just the project folder
+- **fix:** `--root <path>` is now required with a clear error message when missing (previously silently used `cwd`)
+- **feat:** `--local` flag to write `pipeline.json` in current directory instead
+- **feat:** `~`-expansion in `--root` (e.g. `--root ~/workspace`)
+- **fix:** Validates that `--root` directory exists before writing config
+- **docs:** Update README with correct setup flow, remove Windows-only paths
+
+### v0.1.0
+- Initial release: project discovery, pipeline run, dry-run, per-project config, schedule via cron/Task Scheduler

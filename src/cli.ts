@@ -167,5 +167,5 @@ schedule
 
 // ── entry ─────────────────────────────────────────────────────────────────────
 
-program.name('aahp-cron').description('AAHP pipeline orchestrator').version('0.1.0')
+program.name('aahp-cron').description('AAHP pipeline orchestrator').version('0.1.1')
 program.parse()

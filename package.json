@@ -2,7 +2,7 @@
   "name": "aahp-cron",
   "version": "0.1.2",
   "description": "Pipeline orchestrator for AAHP v3 - schedules and runs aahp-runner across all projects",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "author": "Elvatis <emre.kohler@elvatis.com>",
   "repository": {
     "type": "git",

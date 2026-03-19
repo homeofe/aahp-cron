@@ -31,7 +31,7 @@ export function loadConfig(explicitPath?: string): PipelineConfig | null {
       try {
         return JSON.parse(fs.readFileSync(p, 'utf8')) as PipelineConfig
       } catch (e) {
-        throw new Error(`Failed to parse config at ${p}: ${(e as Error).message}`)
+        throw new Error(`Failed to parse config at ${p}: ${(e as Error).message}`, { cause: e })
       }
     }
   }

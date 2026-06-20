@@ -76,3 +76,6 @@ Build green (`npm run build` clean, `dist/` exists). Repo not yet initialized on
 - **(Verified)**: confirmed by running code/tests
 - **(Assumed)**: derived from docs/config, not directly tested
 - **(Unknown)**: needs verification
+
+<!-- aahp-gate -->
+_AAHP verify gate: v3.0.5 synced 2026-06-20._

@@ -1,5 +1,10 @@
 # aahp-cron
 
+[![CI](https://github.com/homeofe/aahp-cron/actions/workflows/ci.yml/badge.svg)](https://github.com/homeofe/aahp-cron/actions/workflows/ci.yml)
+[![AAHP Verify](https://github.com/homeofe/aahp-cron/actions/workflows/aahp-verify.yml/badge.svg)](https://github.com/homeofe/aahp-cron/actions/workflows/aahp-verify.yml)
+[![Security](https://github.com/homeofe/aahp-cron/actions/workflows/codeql.yml/badge.svg)](https://github.com/homeofe/aahp-cron/actions/workflows/codeql.yml)
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
+
 Pipeline orchestrator for [AAHP v3](https://github.com/homeofe/AAHP). Discovers all projects in your dev root, fetches their GitHub issues, and runs [`aahp-runner`](https://github.com/homeofe/aahp-runner) agents across them on a schedule.
 
 ## What it does

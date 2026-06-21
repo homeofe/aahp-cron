@@ -10,6 +10,8 @@
 
 <!-- SECTION: summary -->
 Build green (`npm run build` clean, `dist/` exists). Repo not yet initialized on GitHub.
+
+2026-06-21: Added status-badge block (CI, AAHP Verify, Security, License Apache-2.0) to README header.
 <!-- /SECTION: summary -->
 
 ---

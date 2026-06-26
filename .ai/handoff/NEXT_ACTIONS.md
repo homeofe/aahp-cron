@@ -7,7 +7,7 @@
 
 ## Ready - Work These Next
 
-### T-004: Add vitest and unit tests for core modules [high] (issue #1)
+### T-004: Add vitest and unit tests for core modules [high] (issue #22)
 - **Goal:** Establish a test foundation so future changes can be validated automatically
 - **Context:** The codebase has zero tests. All 8 source modules are fully implemented and production-ready, but nothing is verified beyond "it compiles." Config loading, project discovery, and reporter logic are all pure-function-heavy and highly testable without mocking the filesystem extensively.
 - **What to do:**
@@ -33,7 +33,7 @@
 
 ---
 
-### T-005: Add ESLint with TypeScript support [medium] (issue #2)
+### T-005: Add ESLint with TypeScript support [medium] (issue #23)
 - **Goal:** Enforce consistent code quality and catch potential bugs statically
 - **Context:** No linter is configured. The code is clean but has no automated style enforcement. Adding ESLint now (before more code is written) sets the standard early.
 - **What to do:**
@@ -58,7 +58,7 @@
 
 ---
 
-### T-006: Update CI workflow to run tests and lint [medium] (issue #3)
+### T-006: Update CI workflow to run tests and lint [medium] (issue #24)
 - **Goal:** Gate PRs on test and lint results so regressions are caught before merge
 - **Context:** CI currently only runs `npm run build` and checks that `dist/cli.js` exists. With tests (T-004) and lint (T-005) in place, CI should run all three.
 - **What to do:**
@@ -76,7 +76,7 @@
 
 ---
 
-### T-007: Add runtime validation for pipeline.json [medium] (issue #4)
+### T-007: Add runtime validation for pipeline.json [medium] (issue #25)
 - **Goal:** Give users clear error messages when pipeline.json is malformed instead of cryptic runtime crashes
 - **Context:** `config.ts:loadConfig()` does `JSON.parse()` on the raw file but performs no schema validation. A typo like `"bakend": "claude"` silently becomes a no-op. Adding validation catches these issues early with actionable error messages.
 - **What to do:**
@@ -103,7 +103,7 @@
 
 ---
 
-### T-008: Add integration smoke test with dry-run [low] (issue #5)
+### T-008: Add integration smoke test with dry-run [low] (issue #26)
 - **Goal:** Verify the full CLI pipeline works end-to-end without spawning real agents
 - **Context:** Unit tests (T-004) cover individual modules but do not exercise the full CLI flow. A smoke test using `--dry-run` validates the integration of all components together: config loading, project discovery, filtering, sorting, and reporting.
 - **What to do:**

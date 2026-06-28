@@ -89,3 +89,5 @@ _AAHP verify gate: v3.0.5 synced 2026-06-20._
 > 2026-06-21 ci(aahp): fix unquoted next_task_id + lint-handoff noreply@ PII exclusion.
 
 > 2026-06-27 ci: re-pin supply-chain-guard action to v5.2.37 (be1d718b17cc38e4bce7fa48579b7112e557943b) and enable Dependabot github-actions weekly updates.
+
+> 2026-06-28 security(scheduler): fixed command-injection vulnerability (CVE-class: CWE-78). The configPath CLI argument was interpolated directly into a cron command string without validation. Added validateConfigPath() to src/scheduler.ts which rejects shell metacharacters, leading hyphens (flag injection), and ".." segments (path traversal). Called before command assembly in both registerCronScheduler() and registerWindowsScheduler(). Also fixed pre-existing tsconfig missing "types":["node"] which caused build failure. All 113 tests pass including new regression suite in tests/scheduler.test.ts.

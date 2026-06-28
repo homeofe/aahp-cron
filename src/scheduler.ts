@@ -7,6 +7,39 @@ import type { PipelineConfig } from './types.js'
 const TASK_NAME = 'AAHP-Cron-Pipeline'
 const CRON_MARKER = '# AAHP-Cron-Pipeline'
 
+/**
+ * Validate a file path supplied as a CLI argument before it is embedded in a
+ * scheduled command string.  Rejects:
+ *   - empty strings
+ *   - paths that contain shell metacharacters (;, |, &, $, `, (, ), <, >, \n, \r, !, {, })
+ *   - paths that start with a hyphen (flag injection)
+ *   - path segments equal to ".." (traversal outside a confined directory)
+ *
+ * Throws an Error with a descriptive message on violation.
+ */
+export function validateConfigPath(configPath: string): void {
+  if (!configPath || configPath.trim() === '') {
+    throw new Error('Config path must not be empty')
+  }
+
+  // Reject leading hyphen (flag injection).
+  if (configPath.trimStart().startsWith('-')) {
+    throw new Error(`Config path must not start with a hyphen: "${configPath}"`)
+  }
+
+  // Reject shell metacharacters.
+  // eslint-disable-next-line no-control-regex
+  if (/[;|&$`()\n\r!{}]|<|>/.test(configPath)) {
+    throw new Error(`Config path contains disallowed shell metacharacter(s): "${configPath}"`)
+  }
+
+  // Reject ".." segments to prevent path traversal.
+  const segments = configPath.split(/[\\/]/)
+  if (segments.some(seg => seg === '..')) {
+    throw new Error(`Config path must not contain ".." (path traversal): "${configPath}"`)
+  }
+}
+
 function buildWindowsAction(config: PipelineConfig, configPath: string): string {
   const nodePath = process.execPath
   const cliPath = path.resolve(path.dirname(process.argv[1] ?? ''), '..', 'dist', 'cli.js')
@@ -16,6 +49,7 @@ function buildWindowsAction(config: PipelineConfig, configPath: string): string 
 /** Register a daily Windows Task Scheduler entry at HH:MM. */
 export function registerWindowsScheduler(time: string, config: PipelineConfig, configPath: string): void {
   const [hour, minute] = validateTime(time)
+  validateConfigPath(configPath)
 
   const action = buildWindowsAction(config, configPath)
 
@@ -42,6 +76,7 @@ export function registerWindowsScheduler(time: string, config: PipelineConfig, c
 /** Register a daily cron entry at HH:MM (Linux/macOS). */
 export function registerCronScheduler(time: string, config: PipelineConfig, configPath: string): void {
   const [hour, minute] = validateTime(time)
+  validateConfigPath(configPath)
 
   const nodePath = process.execPath
   const cliPath = path.resolve(path.dirname(process.argv[1] ?? ''), '..', 'dist', 'cli.js')

@@ -3,58 +3,58 @@
   "project": "aahp-cron",
   "last_session": {
     "agent": "claude-opus-4-8",
-    "session_id": "cli-1784009958",
-    "timestamp": "2026-07-14T06:19:18Z",
-    "commit": "69bfd5d",
-    "phase": "implementation",
+    "session_id": "cli-1784032317",
+    "timestamp": "2026-07-14T12:31:58Z",
+    "commit": "e7e97f9",
+    "phase": "fix",
     "duration_minutes": 0
   },
   "files": {
     "STATUS.md": {
-      "checksum": "sha256:072b98aadd78e5e32ff46ca812095b293336080c13f8db49fde1345d181dd4b9",
-      "updated": "2026-07-14T06:19:17Z",
-      "lines": 99,
+      "checksum": "sha256:6061b6f51772e2c7a586fffe9898f738c95bc8179823f5843780c8395b167a23",
+      "updated": "2026-07-14T12:31:38Z",
+      "lines": 101,
       "summary": "﻿# aahp-cron: Current State of the Nation"
     },
     "NEXT_ACTIONS.md": {
       "checksum": "sha256:a23d91857f7cd12284fb6c21b051d607f22ffa00eb7fba17ef9140137425cb7e",
-      "updated": "2026-07-14T06:19:17Z",
+      "updated": "2026-07-14T12:29:50Z",
       "lines": 159,
       "summary": "(no summary available)"
     },
     "LOG.md": {
       "checksum": "sha256:edd8c813a403aef252f694a28dda1893192dd7abc82dc76490d3075314a0fe1f",
-      "updated": "2026-07-14T06:19:17Z",
+      "updated": "2026-07-14T12:29:50Z",
       "lines": 44,
       "summary": "(no summary available)"
     },
     "DASHBOARD.md": {
       "checksum": "sha256:c556e022f38b6a4e89a8973d755515d692d325b962f43f0dcf49a3a8082d17f8",
-      "updated": "2026-07-14T06:19:17Z",
+      "updated": "2026-07-14T12:29:50Z",
       "lines": 58,
       "summary": "(no summary available)"
     },
     "TRUST.md": {
       "checksum": "sha256:1d955dd26c2eea2a431357f19305f26cb9c67f264b1c99f7a3daad369c2997cb",
-      "updated": "2026-07-14T06:19:17Z",
+      "updated": "2026-07-14T12:29:50Z",
       "lines": 73,
       "summary": "(no summary available)"
     },
     "CONVENTIONS.md": {
       "checksum": "sha256:8ee92e2bd7b2c32ba754e24d793c5e5754b19a159589d02ac5f72074429e18ed",
-      "updated": "2026-07-14T06:19:17Z",
+      "updated": "2026-07-14T12:29:50Z",
       "lines": 78,
       "summary": "(no summary available)"
     },
     "WORKFLOW.md": {
       "checksum": "sha256:e40bf2e592bc5742c103cf2355fc265a45f09a2a0e2277cd1c059dc21b37b1fe",
-      "updated": "2026-07-14T06:19:17Z",
+      "updated": "2026-07-14T12:29:50Z",
       "lines": 97,
       "summary": "(no summary available)"
     },
     "pii-allowlist.json": {
       "checksum": "sha256:7c1051f6e2bc3943b7c1dbe4da229694455681b8875a346c99279e555edb733f",
-      "updated": "2026-07-14T06:19:17Z",
+      "updated": "2026-07-14T12:29:50Z",
       "lines": 4,
       "summary": "{"
     }
@@ -62,8 +62,8 @@
   "quick_context": "﻿# aahp-cron: Current State of the Nation (no summary available) ",
   "token_budget": {
     "manifest_only": 85,
-    "manifest_plus_core": 2377,
-    "full_read": 4910
+    "manifest_plus_core": 2422,
+    "full_read": 4955
   }
   ,"next_task_id": "6"
   ,"tasks": {"T-001":{"title":"[T-008] Add integration smoke test with dry-run [low]","status":"ready","priority":"low","depends_on":[],"created":"2026-06-28T10:10:28.761Z","notes":"**AAHP Task:** `T-008`  \n**Status:** ready  \n**Priority:** low  \n\n\n\n\n---\n*Auto-created from AAHP manifest · project: aahp-cron*","github_issue":26,"github_repo":"homeofe/aahp-cron"},"T-002":{"title":"[T-007] Add runtime validation for pipeline.json [medium]","status":"ready","priority":"medium","depends_on":[],"created":"2026-06-28T10:10:28.761Z","notes":"**AAHP Task:** `T-007`  \n**Status:** ready  \n**Priority:** medium  \n\n\n\n\n---\n*Auto-created from AAHP manifest · project: aahp-cron*","github_issue":25,"github_repo":"homeofe/aahp-cron"},"T-003":{"title":"[T-006] Update CI workflow to run tests and lint [medium]","status":"ready","priority":"medium","depends_on":[],"created":"2026-06-28T10:10:28.762Z","notes":"**AAHP Task:** `T-006`  \n**Status:** ready  \n**Priority:** medium  \n\n\n\n\n---\n*Auto-created from AAHP manifest · project: aahp-cron*","github_issue":24,"github_repo":"homeofe/aahp-cron"},"T-004":{"title":"[T-005] Add ESLint with TypeScript support [medium]","status":"ready","priority":"high","depends_on":[],"created":"2026-06-28T10:10:28.762Z","notes":"**AAHP Task:** `T-005`  \n**Status:** ready  \n**Priority:** medium  \n\n\n\n\n---\n*Auto-created from AAHP manifest · project: aahp-cron*","github_issue":22,"github_repo":"homeofe/aahp-cron"},"T-005":{"title":"[T-005] Add ESLint with TypeScript support [medium]","status":"ready","priority":"medium","depends_on":[],"created":"2026-06-28T10:14:55.116Z","notes":"**AAHP Task:** `T-005`  \n**Status:** ready  \n**Priority:** medium  \n\n\n\n\n---\n*Auto-created from AAHP manifest · project: aahp-cron*","github_issue":23,"github_repo":"homeofe/aahp-cron"}}

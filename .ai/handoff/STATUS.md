@@ -99,3 +99,5 @@ _AAHP verify gate: v3.0.5 synced 2026-06-20._
 > 2026-06-30 feat(verify): added reviewed expiring PII allowlist, rolled out from AAHP v3.2.0.
 
 > 2026-06-30 ci: exempt Dependabot from the aahp-verify handoff gate (keep supply-chain-guard/codeql/build).
+
+> 2026-07-18 chore(aahp): adopt AAHP v3.8.0 CLI conformance. Stopped vendoring the package-provided gate scripts (removed scripts/_aahp-lib.sh, aahp-manifest.sh, lint-handoff.sh, verify-handoff.sh, install-hooks.sh, verify-hooks.sh, hooks/pre-commit, hooks/pre-push); the AAHP CLI now provides them. aahp-verify.yml runs the pinned CLI (npm ci + npx --no-install aahp verify/doctor) instead of bash scripts/verify-handoff.sh. Pinned @elvatis_com/aahp to exact 3.8.0 in devDependencies + lockfile, added aahp.config.json (pinnedDep + em-dash forbidden pattern). Added .ai/handoff/GROUNDING.md and a Provenance section in TRUST.md (Grounded Reflection Layer). Repo-specific scripts/validate-pii-allowlist.py kept.

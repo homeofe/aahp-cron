@@ -18,46 +18,46 @@
 
 ## Build System
 
-| Property | Status | Last Verified | Agent | Notes |
-|----------|--------|---------------|-------|-------|
-| `npm install` succeeds | untested | - | - | |
-| `npm run build` passes (tsc) | untested | - | - | |
-| `dist/cli.js` shebang correct | untested | - | - | |
-| `aahp-cron list` runs without error | untested | - | - | |
-| `aahp-cron run --dry-run` runs | untested | - | - | |
+| Property | Status | Provenance | Last Verified | Agent | Notes |
+|----------|--------|------------|---------------|-------|-------|
+| `npm install` succeeds | untested | - | - | - | |
+| `npm run build` passes (tsc) | untested | - | - | - | |
+| `dist/cli.js` shebang correct | untested | - | - | - | |
+| `aahp-cron list` runs without error | untested | - | - | - | |
+| `aahp-cron run --dry-run` runs | untested | - | - | - | |
 
 ---
 
 ## Runtime Dependencies
 
-| Property | Status | Last Verified | Agent | Notes |
-|----------|--------|---------------|-------|-------|
-| aahp-runner CLI reachable at `../aahp-runner/dist/cli.js` | assumed | - | - | Based on workspace layout |
-| `node >= 20` available | assumed | - | - | Required by package.json engines |
-| `gh` CLI installed + authenticated | assumed | - | - | Needed for issue sync |
-| `ANTHROPIC_API_KEY` or `claude` CLI available | assumed | - | - | Passed through to aahp-runner |
+| Property | Status | Provenance | Last Verified | Agent | Notes |
+|----------|--------|------------|---------------|-------|-------|
+| aahp-runner CLI reachable at `../aahp-runner/dist/cli.js` | assumed | - | - | - | Based on workspace layout |
+| `node >= 20` available | assumed | - | - | - | Required by package.json engines |
+| `gh` CLI installed + authenticated | assumed | - | - | - | Needed for issue sync |
+| `ANTHROPIC_API_KEY` or `claude` CLI available | assumed | - | - | - | Passed through to aahp-runner |
 
 ---
 
 ## Integration
 
-| Property | Status | Last Verified | Agent | Notes |
-|----------|--------|---------------|-------|-------|
-| aahp-runner subprocess spawns correctly | untested | - | - | |
-| Project discovery finds MANIFEST.json files | untested | - | - | |
-| Windows Task Scheduler registration works | untested | - | - | |
-| Run history written to `~/.aahp/cron-history.json` | untested | - | - | |
-| Log files written to `~/.aahp/cron-logs/` | untested | - | - | |
+| Property | Status | Provenance | Last Verified | Agent | Notes |
+|----------|--------|------------|---------------|-------|-------|
+| aahp-runner subprocess spawns correctly | untested | - | - | - | |
+| Project discovery finds MANIFEST.json files | untested | - | - | - | |
+| Windows Task Scheduler registration works | untested | - | - | - | |
+| Run history written to `~/.aahp/cron-history.json` | untested | - | - | - | |
+| Log files written to `~/.aahp/cron-logs/` | untested | - | - | - | |
 
 ---
 
 ## Security
 
-| Property | Status | Last Verified | Agent | Notes |
-|----------|--------|---------------|-------|-------|
-| No secrets in source | assumed | - | - | `.aiignore` configured |
-| `pipeline.json` gitignored | assumed | - | - | Listed in `.gitignore` |
-| No PII in handoff files | assumed | - | - | `.aiignore` in place |
+| Property | Status | Provenance | Last Verified | Agent | Notes |
+|----------|--------|------------|---------------|-------|-------|
+| No secrets in source | assumed | - | - | - | `.aiignore` configured |
+| `pipeline.json` gitignored | assumed | - | - | - | Listed in `.gitignore` |
+| No PII in handoff files | assumed | - | - | - | `.aiignore` in place |
 
 ---
 
@@ -71,3 +71,18 @@
 ---
 
 *Trust degrades over time. Re-verify periodically, especially after major refactors.*
+
+---
+
+## Provenance (Draft v0.1, proposed)
+
+The Grounded Reflection Layer adds an orthogonal *provenance* field recording HOW a
+claim was checked, separate from the Status above. Provenance tokens, weakest to
+strongest: `model_claim`, `self_reviewed`, `cross_model_reviewed`, `source_verified`,
+`tool_verified`, `test_verified`, `runtime_observed`, `human_confirmed`.
+`cross_model_reviewed` maps to status `assumed`, never `verified`; only
+`source_verified` / `tool_verified` / `test_verified` / `runtime_observed` /
+`human_confirmed` can support `verified` (grounded). The `Provenance` column in the tables
+above records it and uses `-` when it is unknown. TTL and expiry
+stay governed by the Trust Decay rule (README section 2.5). See GROUNDING.md for the anchor
+matrix and README section 2.10 for the doctrine.

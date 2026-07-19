@@ -1,3 +1,5 @@
+> Note (2026-07-19, claude-opus-4-8): Aligned the AAHP v3.8.0 conformance PR (#49) with its code review. Restored the MANIFEST project field to aahp-cron (the CLI regen had rewritten it to the temporary clone-directory name) and confirmed the handoff tasks and next_task_id survived the regen intact, preserving the task-to-github_issue links. Corrected the PR-body follow-up note that claimed GitHub Actions was off org-wide (homeofe Actions is on). Left the canonical GROUNDING.md and TRUST.md wording and the seeded Provenance placeholders unchanged, since those are copied verbatim from the @elvatis_com/aahp package and asserting specific provenance values here would fabricate verification.
+
 > Note (2026-07-14, claude-opus-4-8): Synced the canonical AAHP gate scripts from homeofe/improvements (v3.5.0 fixes: aahp-manifest.sh --phase documentation + cross_repo_ref preservation, lint-handoff.sh SC2034), AAHP_HANDOFF_FILES preserved, and refreshed the local hook tooling (scripts/hooks/, install-hooks.sh, verify-hooks.sh). Fleet re-sync.
 
 > Note (2026-07-14, claude-opus-4-8): Synced the canonical Layer 3 tolerance fix from homeofe/improvements. verify-handoff.sh now downgrades a non-ancestor MANIFEST.last_session.commit from FAIL to WARN so a squash-merge or rebase-merge no longer trips AAHP Verify Layer 3 on main; Layers 1-2 still gate real staleness.
@@ -99,3 +101,5 @@ _AAHP verify gate: v3.0.5 synced 2026-06-20._
 > 2026-06-30 feat(verify): added reviewed expiring PII allowlist, rolled out from AAHP v3.2.0.
 
 > 2026-06-30 ci: exempt Dependabot from the aahp-verify handoff gate (keep supply-chain-guard/codeql/build).
+
+> 2026-07-18 chore(aahp): adopt AAHP v3.8.0 CLI conformance. Stopped vendoring the package-provided gate scripts (removed scripts/_aahp-lib.sh, aahp-manifest.sh, lint-handoff.sh, verify-handoff.sh, install-hooks.sh, verify-hooks.sh, hooks/pre-commit, hooks/pre-push); the AAHP CLI now provides them. aahp-verify.yml runs the pinned CLI (npm ci + npx --no-install aahp verify/doctor) instead of bash scripts/verify-handoff.sh. Pinned @elvatis_com/aahp to exact 3.8.0 in devDependencies + lockfile, added aahp.config.json (pinnedDep + em-dash forbidden pattern). Added .ai/handoff/GROUNDING.md and a Provenance section in TRUST.md (Grounded Reflection Layer). Repo-specific scripts/validate-pii-allowlist.py kept.

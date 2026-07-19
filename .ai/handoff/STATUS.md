@@ -103,3 +103,5 @@ _AAHP verify gate: v3.0.5 synced 2026-06-20._
 > 2026-06-30 ci: exempt Dependabot from the aahp-verify handoff gate (keep supply-chain-guard/codeql/build).
 
 > 2026-07-18 chore(aahp): adopt AAHP v3.8.0 CLI conformance. Stopped vendoring the package-provided gate scripts (removed scripts/_aahp-lib.sh, aahp-manifest.sh, lint-handoff.sh, verify-handoff.sh, install-hooks.sh, verify-hooks.sh, hooks/pre-commit, hooks/pre-push); the AAHP CLI now provides them. aahp-verify.yml runs the pinned CLI (npm ci + npx --no-install aahp verify/doctor) instead of bash scripts/verify-handoff.sh. Pinned @elvatis_com/aahp to exact 3.8.0 in devDependencies + lockfile, added aahp.config.json (pinnedDep + em-dash forbidden pattern). Added .ai/handoff/GROUNDING.md and a Provenance section in TRUST.md (Grounded Reflection Layer). Repo-specific scripts/validate-pii-allowlist.py kept.
+
+> Note (2026-07-19): Re-pinned @elvatis_com/aahp from 3.8.0 to 3.8.1 (picks up the v3.8.1 Windows/MSYS manifest-regen fix so tasks, next_task_id and cross_repo_ref survive regeneration). No runtime behavior change on Linux or CI. Handoff refreshed and MANIFEST regenerated.

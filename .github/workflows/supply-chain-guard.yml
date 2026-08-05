@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: homeofe/supply-chain-guard@ea00551de8e8a95bc1bf4533acb5bf7f883e3132  # v5.2.43
+      - uses: homeofe/supply-chain-guard@cc017bf7b353492c474bd51f63974ce40549af9e  # v5.24.0
         with:
           fail-on: critical
           comment-on-pr: true
